@@ -46,12 +46,12 @@
 											while($data = mysqli_fetch_array($ress)) {
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['nama_kon'] .'</td>';
-												echo '<td class="text-center">'. $data['telp_kon'] .'</td>';
-												echo '<td class="text-center">'. $data['alamat_kon'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama_kon']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['telp_kon']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['alamat_kon']) .'</td>';
 												echo '<td class="text-center">
-													  <a href="konsumen_edit.php?kon='. $data['id_kon'] .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="konsumen_hapus.php?kon=<?php echo $data['id_kon'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['nama_kon'];?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
+													  <a href="konsumen_edit.php?kon=' . htmlspecialchars($data['id_kon']) .'" class="btn btn-warning btn-xs">Edit</a>';?>
+													  <a href="konsumen_hapus.php?kon=<?php echo $data['id_kon'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo ' . htmlspecialchars($data['nama_kon']) . ';?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
 												<?php
 													  echo '</td>';
 												echo '</tr>';												

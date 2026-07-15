@@ -46,12 +46,12 @@
 											while($data = mysqli_fetch_array($ress)) {
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['nama_spl'] .'</td>';
-												echo '<td class="text-center">'. $data['telp_spl'] .'</td>';
-												echo '<td class="text-center">'. $data['alamat_spl'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama_spl']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['telp_spl']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['alamat_spl']) .'</td>';
 												echo '<td class="text-center">
-													  <a href="supplier_edit.php?spl='. $data['id_spl'] .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="supplier_hapus.php?spl=<?php echo $data['id_spl'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['nama_spl'];?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
+													  <a href="supplier_edit.php?spl=' . htmlspecialchars($data['id_spl']) .'" class="btn btn-warning btn-xs">Edit</a>';?>
+													  <a href="supplier_hapus.php?spl=<?php echo $data['id_spl'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo ' . htmlspecialchars($data['nama_spl']) . ';?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
 												<?php
 													  echo '</td>';
 												echo '</tr>';												

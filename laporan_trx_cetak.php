@@ -92,10 +92,10 @@
 												$tot = $data['total'];
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['id_trx'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['id_trx']) .'</td>';
 												echo '<td class="text-center">'. format_tanggal($data['tgl_trx']) .'</td>';
-												echo '<td class="text-center">'. $data['nama_kon'] .'</td>';
-												echo '<td class="text-center">'. $data['nama_kasir'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama_kon']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama_kasir']) .'</td>';
 												echo '<td class="text-center">'. format_rupiah($data['total']) .'</td>';
 												echo '</tr>';												
 												$i++;

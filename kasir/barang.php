@@ -1,6 +1,6 @@
 <?php
 	include("sess_check.php");
-	
+
 	// deskripsi halaman
 	$pagedesc = "Data Barang";
 	include("layout_top.php");
@@ -16,11 +16,11 @@
                         <h1 class="page-header">Data Barang</h1>
                     </div><!-- /.col-lg-12 -->
                 </div><!-- /.row -->
-				
+
 				<div class="row">
 					<div class="col-lg-12"><?php include("layout_alert.php"); ?></div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
@@ -47,16 +47,16 @@
 											while($data = mysqli_fetch_array($ress)) {
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['nama'] .'</td>';
-												echo '<td class="text-center">'. $data['stok'] .'</td>';
+												echo '<td class="text-center">'. htmlspecialchars($data['nama']) .'</td>';
+												echo '<td class="text-center">'. htmlspecialchars($data['stok']) .'</td>';
 												echo '<td class="text-center">'. format_rupiah($data['harga']) .'</td>';
-												echo '<td class="text-center">'. $data['keterangan'] .'</td>';
+												echo '<td class="text-center">'. htmlspecialchars($data['keterangan']) .'</td>';
 												echo '<td class="text-center">
 													  <a href="barang_edit.php?brg='. $data['id_brg'] .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="barang_hapus.php?brg=<?php echo $data['id_brg'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['nama'];?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
+													  <a href="barang_hapus.php?brg=<?php echo $data['id_brg'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo htmlspecialchars($data['nama']);?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
 												<?php
 													  echo '</td>';
-												echo '</tr>';												
+												echo '</tr>';
 												$i++;
 											}
 										?>
@@ -72,7 +72,7 @@
 						</div>
 					</div>
 				</div>
-			</div>    
+			</div>
 						</div><!-- /.panel -->
 					</div><!-- /.col-lg-12 -->
 				</div><!-- /.row -->
@@ -88,7 +88,7 @@
 				{ "orderable": false, "targets": [5] }
 			]
 		});
-		
+
 		$('#tabel-data').parent().addClass("table-responsive");
 	});
 </script>
@@ -96,7 +96,7 @@
 		var app = {
 			code: '0'
 		};
-		
+
 		$('[data-load-code]').on('click',function(e) {
 					e.preventDefault();
 					var $this = $(this);
@@ -104,10 +104,10 @@
 					if(code) {
 						$($this.data('remote-target')).load('karyawan_detail.php?code='+code);
 						app.code = code;
-						
+
 					}
-		});		
+		});
     </script>
 <?php
-	include("layout_bottom.php");
-?>
+		include("layout_bottom.php");
+	?>

@@ -46,12 +46,12 @@
 											while($data = mysqli_fetch_array($ress)) {
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['nama'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama']) .'</td>';
 												echo '<td class="text-center">'. format_rupiah($data['harga']) .'</td>';
-												echo '<td class="text-center">'. $data['keterangan'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['keterangan']) .'</td>';
 												echo '<td class="text-center">
-													  <a href="jasa_edit.php?js='. $data['id_brg'] .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="jasa_hapus.php?js=<?php echo $data['id_brg'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['nama'];?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
+													  <a href="jasa_edit.php?js=' . htmlspecialchars($data['id_brg']) .'" class="btn btn-warning btn-xs">Edit</a>';?>
+													  <a href="jasa_hapus.php?js=<?php echo $data['id_brg'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo ' . htmlspecialchars($data['nama']) . ';?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
 												<?php
 													  echo '</td>';
 												echo '</tr>';												

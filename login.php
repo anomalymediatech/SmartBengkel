@@ -21,7 +21,7 @@
 
 	<!-- Custom Fonts -->
 	<link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
+
 	<!-- jQuery -->
 	<script src="libs/jquery/dist/jquery.min.js"></script>
 
@@ -53,7 +53,9 @@
 						<div class="col-lg-12">
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<form action="login_auth.php" method="post">
+									<form action="login_auth_v2.php" method="post">
+										<?php if (empty(session_id())) { session_start(); } if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); } ?>
+										<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 										<div class="form-group">
 											<input type="text" class="form-control" name="username" placeholder="Username" required>
 										</div>
@@ -79,7 +81,7 @@
 			</div><!-- /.row -->
 		</div><!-- /.container -->
 	</section>
-	
+
 	<!-- footer-bottom -->
 	<div class="navbar navbar-inverse navbar-fixed-bottom footer-bottom">
 		<div class="container text-center">

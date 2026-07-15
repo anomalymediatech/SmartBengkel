@@ -86,8 +86,8 @@
 											while($data = mysqli_fetch_array($ress)) {
 												echo '<tr>';
 												echo '<td class="text-center">'. $i .'</td>';
-												echo '<td class="text-center">'. $data['nama'] .'</td>';
-												echo '<td class="text-center">'. $data['stok'] .'</td>';
+												echo '<td>' . htmlspecialchars($data['nama']) .'</td>';
+												echo '<td>' . htmlspecialchars($data['stok']) .'</td>';
 												echo '</tr>';												
 												$i++;
 											}

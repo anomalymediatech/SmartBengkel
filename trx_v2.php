@@ -107,15 +107,15 @@
 
                       echo '<tr>';
                       echo '<td class="text-center">'.$i.'</td>';
-                      echo '<td><strong>'.$row['id_trx'].'</strong></td>';
+                      echo '<td><strong>' . htmlspecialchars($data['id_trx']) .'</strong></td>';
                       echo '<td>'.format_tanggal($row['tgl_trx']).'</td>';
                       echo '<td>'.$nama_kon.'</td>';
                       echo '<td class="text-right"><strong>'.format_rupiah($row['total']).'</strong></td>';
                       echo '<td class="text-center">'.$metode_label.'</td>';
                       echo '<td class="text-center">'.$status_label.'</td>';
                       echo '<td class="text-center">';
-                      echo '<a href="trx_detail_v2.php?id='.$row['id_trx'].'" class="btn btn-info btn-xs" title="Lihat Detail"><i class="fa fa-eye"></i> Detail</a> ';
-                      echo '<a href="struk_thermal.php?id='.$row['id_trx'].'" class="btn btn-default btn-xs" title="Cetak Struk"><i class="fa fa-print"></i> Cetak</a>';
+                      echo '<a href="trx_detail_v2.php?id=' . htmlspecialchars($data['id_trx']) .'" class="btn btn-info btn-xs" title="Lihat Detail"><i class="fa fa-eye"></i> Detail</a> ';
+                      echo '<a href="struk_thermal.php?id=' . htmlspecialchars($data['id_trx']) .'" class="btn btn-default btn-xs" title="Cetak Struk"><i class="fa fa-print"></i> Cetak</a>';
                       echo '</td>';
                       echo '</tr>';
                       $i++;

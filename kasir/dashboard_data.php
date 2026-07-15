@@ -33,6 +33,6 @@ for ($d = 1; $d <= $days_in_month; $d++) {
     $data[]   = isset($lookup[$d]) ? $lookup[$d] : 0;
 }
 
-// Kirim respons JSON
+// Kirim respons JSON dengan Content-Type yang benar
 header('Content-Type: application/json');
 echo json_encode(["labels" => $labels, "data" => $data]);

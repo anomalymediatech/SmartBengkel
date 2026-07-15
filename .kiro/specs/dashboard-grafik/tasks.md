@@ -43,14 +43,14 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Jalankan minimum 100 iterasi
     - _Requirements: 4.2_
 
-- [~] 3. Checkpoint — Verifikasi kedua endpoint AJAX
+- [x] 3. Checkpoint — Verifikasi kedua endpoint AJAX
   - Jalankan kedua file endpoint via CLI (`php dashboard_data.php`, `php kasir/dashboard_data.php`) dan pastikan output JSON valid
   - Pastikan semua tes di `tests/prop_dashboard_data_json.php` dan `tests/prop_kasir_chart_isolation.php` lulus
 
-- [ ] 4. Bangun ulang `index.php` — Dashboard Admin
-  - [-] 4.1 Tulis query statistik harian Admin dan struktur HTML dasar
+- [x] 4. Bangun ulang `index.php` — Dashboard Admin
+  - [x] 4.1 Tulis query statistik harian Admin dan struktur HTML dasar
     - Pertahankan `include("sess_check.php")` dan `include("dist/function/format_rupiah.php")` di baris pertama
-    - Tulis 4 query sinkron: `$sql_stats` (omset + jml_trx), `$sql_items` (item terjual), `$sql_pelanggan` (pelanggan unik), dan `$sql_laba` (laba kotor dengan `COALESCE`)
+    - Tulis 4 query sinkron: `$sql_stats` (omset + jml_trx dengan `COALESCE`), `$sql_items` (item terjual), `$sql_pelanggan` (pelanggan unik, kecualikan `id_kon = 0`), dan `$sql_laba` (laba kotor dengan `COALESCE`)
     - Gunakan `@$res = mysqli_query(...)` untuk query laba kotor (fallback `harga_modal_snap`) dan query stok menipis (fallback `stok_min`)
     - Set `$pagedesc = "Beranda"` dan `include("layout_top.php")`
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 7.1, 8.1_
@@ -63,10 +63,10 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Jalankan minimum 100 iterasi
     - _Requirements: 7.1_
 
-  - [~] 4.3 Render 4 Widget_Statistik baris atas + widget Laba Kotor
+  - [x] 4.3 Render 4 Widget_Statistik baris atas + widget Laba Kotor
     - Render 4 panel (`col-lg-3 col-md-6`): "Omset Hari Ini" (panel-primary), "Jumlah Transaksi" (panel-yellow), "Item Terjual" (panel-green), "Pelanggan" (panel-teal)
-    - Render widget Laba Kotor: kelas panel `panel-green` jika `$laba_kotor > 0`, `panel-red` jika `<= 0`
-    - Semua nilai `0` (atau `Rp 0`) jika query menghasilkan NULL
+    - Render widget Laba Kotor terpisah: kelas panel `panel-green` jika `$laba_kotor > 0`, `panel-red` jika `<= 0`
+    - Semua nilai menampilkan `0` (atau `Rp 0`) jika query menghasilkan NULL
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 7.2, 7.3, 7.4_
 
   - [ ]* 4.4 Tulis property test P8 — warna panel laba kotor mencerminkan tanda nilai
@@ -77,9 +77,9 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Jalankan minimum 100 iterasi
     - _Requirements: 7.2, 7.3_
 
-  - [~] 4.5 Render `include("alert_jatuh_tempo.php")` secara kondisional dan panel Stok Menipis
+  - [x] 4.5 Render `include("alert_jatuh_tempo.php")` secara kondisional dan panel Stok Menipis
     - Tambahkan `include("alert_jatuh_tempo.php")` di atas widget (file ini sudah ada, tidak dimodifikasi)
-    - Render panel "Stok Menipis" menggunakan `$sql_stok` (maks 5 item, ORDER BY stok ASC)
+    - Render panel "Stok Menipis" menggunakan `$sql_stok` (maks 5 item, `ORDER BY CAST(stok AS UNSIGNED) ASC LIMIT 5`)
     - Jika `@$res_stok` gagal (kolom `stok_min` tidak ada), sembunyikan panel seluruhnya — tanpa error fatal
     - Jika tidak ada item stok menipis, tampilkan teks "Tidak ada barang dengan stok menipis"
     - Tambahkan tautan "Lihat Semua" ke halaman manajemen barang
@@ -89,7 +89,7 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Buat `tests/prop_alert_visibility.php`
     - **Property 5: Visibilitas alert jatuh tempo berkorelasi tepat dengan data**
     - Generator: kumpulan record piutang/hutang dengan `jatuh_tempo` dan `status_bayar` acak
-    - Assertion: alert tampil ↔ ada minimal 1 record dengan `jatuh_tempo <= CURDATE() + 3 hari` dan `status_bayar = 'Belum Lunas'`
+    - Assertion: alert tampil ↔ ada minimal 1 record dengan `jatuh_tempo <= CURDATE() + INTERVAL 3 DAY` dan `status_bayar = 'Belum Lunas'`
     - Jalankan minimum 100 iterasi
     - _Requirements: 5.1, 5.2_
 
@@ -97,11 +97,11 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Buat `tests/prop_stok_menipis.php`
     - **Property 6: Panel stok menipis hanya menampilkan barang yang memenuhi kondisi dan dibatasi 5**
     - Generator: kumpulan record `barangjasa` acak dengan berbagai nilai `stok` dan `stok_min`
-    - Assertion: setiap item yang ditampilkan memenuhi `CAST(stok) <= stok_min`; jumlah item ≤ 5
+    - Assertion: setiap item yang ditampilkan memenuhi `CAST(stok AS UNSIGNED) <= stok_min`; jumlah item ≤ 5
     - Jalankan minimum 100 iterasi
     - _Requirements: 6.1, 6.3_
 
-  - [~] 4.8 Render `<canvas>` grafik dan inisialisasi Chart.js via AJAX
+  - [x] 4.8 Render `<canvas>` grafik dan inisialisasi Chart.js via AJAX
     - Tambahkan tag `<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>` di area `<head>` melalui modifikasi layout atau inline sebelum `layout_bottom.php`
     - Render `<canvas id="salesChart">` dalam panel grafik
     - Tulis blok `<script>`: `$.getJSON("dashboard_data.php").done(callback).fail(errorHandler)`
@@ -110,15 +110,15 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Tutup dengan `include("layout_bottom.php")`
     - _Requirements: 3.1, 3.2, 3.5, 3.6_
 
-- [~] 5. Checkpoint — Verifikasi Dashboard Admin
+- [x] 5. Checkpoint — Verifikasi Dashboard Admin
   - Pastikan semua property test untuk komponen Admin lulus
   - Periksa secara manual: 4 widget tampil, widget laba kotor berwarna sesuai, panel stok menipis, grafik line Chart.js ter-render
 
-- [ ] 6. Bangun ulang `kasir/index.php` — Dashboard Kasir
-  - [-] 6.1 Tulis query statistik harian Kasir dan struktur HTML dasar
+- [x] 6. Bangun ulang `kasir/index.php` — Dashboard Kasir
+  - [x] 6.1 Tulis query statistik harian Kasir dan struktur HTML dasar
     - Pertahankan `include("sess_check.php")` (versi kasir) sebagai baris pertama
     - Ambil `$id_kasir = (int)$_SESSION['kasir_id']`
-    - Tulis 2 query sinkron: `$sql_kasir` (jml_trx + omset dengan filter `id_kasir`) dan `$sql_items_kasir` (item terjual kasir)
+    - Tulis 2 query sinkron: `$sql_kasir` (jml_trx + omset dengan filter `id_kasir` dan `COALESCE`) dan `$sql_items_kasir` (item terjual kasir)
     - Set `$pagedesc = "Beranda"` dan `include("layout_top.php")`
     - **Tidak** menyertakan `include("alert_jatuh_tempo.php")`, query laba kotor, atau query stok menipis
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 5.5, 8.2_
@@ -131,13 +131,13 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Jalankan minimum 100 iterasi
     - _Requirements: 2.1, 2.2, 2.3_
 
-  - [~] 6.3 Render 3 Widget_Statistik Kasir
+  - [x] 6.3 Render 3 Widget_Statistik Kasir
     - Render 3 panel (`col-lg-4 col-md-6`): "Transaksi Hari Ini" (panel-primary), "Item Terjual" (panel-green), "Omset Saya Hari Ini" (panel-yellow)
     - Semua nilai default `0` / `Rp 0` jika tidak ada data
     - Pastikan **tidak ada** elemen HTML widget laba kotor, panel stok menipis, atau blok `alert-blink`
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-  - [~] 6.4 Render `<canvas>` grafik batang dan inisialisasi Chart.js via AJAX
+  - [x] 6.4 Render `<canvas>` grafik batang dan inisialisasi Chart.js via AJAX
     - Render `<canvas id="kasirChart">` dalam panel grafik
     - Tulis blok `<script>`: `$.getJSON("kasir/dashboard_data.php").done(callback).fail(errorHandler)`
     - Di callback: inisialisasi `new Chart(ctx, {type: 'bar', ...})` dengan data dari JSON
@@ -163,7 +163,7 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
     - Jalankan minimum 100 iterasi
     - _Requirements: 8.3, 8.4_
 
-- [~] 8. Final Checkpoint — Pastikan semua tes lulus
+- [ ] 8. Final Checkpoint — Pastikan semua tes lulus
   - Jalankan seluruh skrip di folder `tests/`: `php tests/prop_format_rupiah.php`, `php tests/prop_kasir_isolation.php`, `php tests/prop_dashboard_data_json.php`, dst.
   - Pastikan semua tes lulus, tanyakan ke user jika ada pertanyaan sebelum lanjut.
 
@@ -177,6 +177,7 @@ Implementasi meningkatkan halaman Beranda Admin (`index.php`) dan Beranda Kasir 
 - Gunakan `@$res = mysqli_query(...)` (operator `@`) sesuai konvensi codebase yang ada untuk kolom opsional (`harga_modal_snap`, `stok_min`)
 - `$id_kasir` selalu di-cast ke `(int)` sebelum dimasukkan ke query untuk mencegah SQL injection
 - Chart.js dimuat dari CDN (`https://cdn.jsdelivr.net/npm/chart.js`) — pastikan ada koneksi internet saat pengembangan
+- Semua query aggregasi menggunakan `COALESCE(..., 0)` untuk menghindari nilai NULL dari `SUM()`/`COUNT()` pada result set kosong
 
 ---
 

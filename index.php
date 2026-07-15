@@ -119,7 +119,7 @@
 							</div>
 							<div class="col-xs-9 text-right">
 								<div class="huge"><?php echo $jml_trx; ?></div>
-								<div>Transaksi Hari Ini</div>
+								<div>Jumlah Transaksi</div>
 							</div>
 						</div>
 					</div>
@@ -139,7 +139,7 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-3">
-								<i class="fa fa-cubes fa-3x"></i>
+								<i class="fa fa-tags fa-3x"></i>
 							</div>
 							<div class="col-xs-9 text-right">
 								<div class="huge"><?php echo $item_terjual; ?></div>

@@ -1,6 +1,6 @@
 <?php
 	include("sess_check.php");
-	
+
 	// deskripsi halaman
 	$pagedesc = "Transaksi";
 	include("layout_top.php");
@@ -16,11 +16,11 @@
                         <h1 class="page-header">Data Transaksi</h1>
                     </div><!-- /.col-lg-12 -->
                 </div><!-- /.row -->
-				
+
 				<div class="row">
 					<div class="col-lg-12"><?php include("layout_alert.php"); ?></div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
@@ -29,10 +29,13 @@
 									<thead>
 										<tr>
 											<th width="1%">No</th>
-											<th width="10%">ID Trx</th>
-											<th width="10%">Tgl Trx</th>
-											<th width="8%">Konsumen</th>
-											<th width="8%">Kasir</th>
+											<th width="8%">ID Trx</th>
+											<th width="8%">Tgl Trx</th>
+											<th width="7%">Konsumen</th>
+											<th width="7%">Kasir</th>
+											<th width="6%">Metode</th>
+											<th width="6%">Status</th>
+											<th width="7%">Jatuh Tempo</th>
 											<th width="8%">Total</th>
 											<th width="10%">Opsi</th>
 										</tr>
@@ -40,7 +43,7 @@
 									<tbody>
 										<?php
 											$i = 1;
-											$sql = "SELECT trx.*, konsumen.*, kasir.* FROM trx, konsumen, kasir WHERE
+											$sql = "SELECT trx.*, konsumen.nama_kon, kasir.nama_kasir FROM trx, konsumen, kasir WHERE
 													trx.id_kon=konsumen.id_kon AND trx.id_kasir=kasir.id_kasir ORDER BY trx.id_trx DESC";
 											$ress = mysqli_query($conn, $sql);
 											while($data = mysqli_fetch_array($ress)) {
@@ -50,15 +53,18 @@
 												echo '<td class="text-center">'. format_tanggal($data['tgl_trx']) .'</td>';
 												echo '<td class="text-center">'. $data['nama_kon'] .'</td>';
 												echo '<td class="text-center">'. $data['nama_kasir'] .'</td>';
+												echo '<td class="text-center">'. (isset($data['metode_bayar']) ? $data['metode_bayar'] : '-') .'</td>';
+												echo '<td class="text-center"><span class="label label-'. (isset($data['status_bayar']) && $data['status_bayar'] == 'Lunas' ? 'success' : 'warning') .'">'. (isset($data['status_bayar']) ? $data['status_bayar'] : 'Lunas') .'</span></td>';
+												echo '<td class="text-center">'. (isset($data['jatuh_tempo']) && $data['jatuh_tempo'] ? format_tanggal($data['jatuh_tempo']) : '-') .'</td>';
 												echo '<td class="text-center">'. format_rupiah($data['total']) .'</td>';
 												echo '<td class="text-center">
 													  <a href="#myModal" data-toggle="modal" data-load-code="'.$data['id_trx'].'" data-remote-target="#myModal .modal-body" class="btn btn-primary btn-xs">Detail</a>
 												';?>
 													  <a href="trx_cetak.php?id=<?php echo $data['id_trx'];?>" target="_blank" class="btn btn-warning btn-xs">Cetak</a>
-													  <a href="trx_hapus.php?trx=<?php echo $data['id_trx'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['id_trx'];?>?');" class="btn btn-danger btn-xs">Hapus</a>												  
+													  <a href="trx_hapus.php?trx=<?php echo $data['id_trx'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $data['id_trx'];?>?');" class="btn btn-danger btn-xs">Hapus</a>
 												<?php
 													  echo '</td>';
-												echo '</tr>';												
+												echo '</tr>';
 												$i++;
 											}
 										?>
@@ -74,7 +80,7 @@
 						</div>
 					</div>
 				</div>
-			</div>    
+			</div>
 						</div><!-- /.panel -->
 					</div><!-- /.col-lg-12 -->
 				</div><!-- /.row -->
@@ -87,18 +93,18 @@
 			"responsive": true,
 			"processing": true,
 			"columnDefs": [
-				{ "orderable": false, "targets": [5] }
+				{ "orderable": false, "targets": [9] }
 			]
 		});
-		
+
 		$('#tabel-data').parent().addClass("table-responsive");
 	});
-</script>
+
 	<script>
 		var app = {
 			code: '0'
 		};
-		
+
 		$('[data-load-code]').on('click',function(e) {
 					e.preventDefault();
 					var $this = $(this);
@@ -106,9 +112,9 @@
 					if(code) {
 						$($this.data('remote-target')).load('trx_detail.php?code='+code);
 						app.code = code;
-						
+
 					}
-		});		
+		});
     </script>
 <?php
 	include("layout_bottom.php");
