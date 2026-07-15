@@ -1,0 +1,7 @@
+Nama,Jenis,Stok,Harga,Harga Modal,Stok Minimum,Keterangan
+Oli Mesin 5W-30,barang,50,85000,65000,10,Oli original
+Busi Iridium,barang,30,45000,35000,5,
+Filter Oli,barang,40,25000,18000,5,
+Kampas Rem Depan,barang,20,120000,85000,5,
+Ganti Oli,jasa,0,50000,0,0,Termasuk jasa ganti
+Service Ringan,jasa,0,150000,0,0,,
