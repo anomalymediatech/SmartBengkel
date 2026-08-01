@@ -151,8 +151,102 @@
 									else {
 										echo '<li><a href="konsumen.php">Data Konsumen</a></li>';
 									}
+									if($pagedesc == "Data Kendaraan") {
+										echo '<li><a href="kendaraan.php" class="active">Data Kendaraan</a></li>';
+									}
+									else {
+										echo '<li><a href="kendaraan.php">Data Kendaraan</a></li>';
+									}
 								?>
 							</ul><!-- /.nav-second-level -->
+						</li>
+						<?php
+							if(isset($menuparent) && $menuparent == "piutang") {
+								echo '<li class="active">';
+							}
+							else {
+								echo '<li>';
+							}
+						?>
+                        <!-- Piutang / Hutang -->
+							<a href="#"><i class="fa fa-money fa-fw"></i>&nbsp;Piutang & Hutang<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<?php
+									if($pagedesc == "Piutang Pelanggan") {
+										echo '<li><a href="piutang.php" class="active">Piutang Pelanggan</a></li>';
+									}
+									else {
+										echo '<li><a href="piutang.php">Piutang Pelanggan</a></li>';
+									}
+									if($pagedesc == "Hutang Supplier") {
+										echo '<li><a href="hutang.php" class="active">Hutang Supplier</a></li>';
+									}
+									else {
+										echo '<li><a href="hutang.php">Hutang Supplier</a></li>';
+									}
+								?>
+							</ul><!-- /.nav-second-level -->
+						</li>
+						<?php
+							if(isset($menuparent) && $menuparent == "barang") {
+								echo '<li class="active">';
+							}
+							else {
+								echo '<li>';
+							}
+						?>
+                        <!-- Data Master -->
+							<a href="#"><i class="fa fa-database fa-fw"></i>&nbsp;Data Master<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<?php
+									if($pagedesc == "Data Barang") {
+										echo '<li><a href="barang.php" class="active">Data Barang</a></li>';
+									}
+									else {
+										echo '<li><a href="barang.php">Data Barang</a></li>';
+									}
+									if($pagedesc == "Data Jasa") {
+										echo '<li><a href="jasa.php" class="active">Data Jasa</a></li>';
+									}
+									else {
+										echo '<li><a href="jasa.php">Data Jasa</a></li>';
+									}
+									if($pagedesc == "Data Supplier") {
+										echo '<li><a href="supplier.php" class="active">Data Supplier</a></li>';
+									}
+									else {
+										echo '<li><a href="supplier.php">Data Supplier</a></li>';
+									}
+								?>
+							</ul><!-- /.nav-second-level -->
+						</li>
+						<?php
+							if(isset($menuparent) && $menuparent == "sdm") {
+								echo '<li class="active">';
+							}
+							else {
+								echo '<li>';
+							}
+						?>
+                        <!-- SDM / Penggajian -->
+							<a href="#"><i class="fa fa-users fa-fw"></i>&nbsp;SDM & Penggajian<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<?php
+									if($pagedesc == "Data Pegawai") {
+										echo '<li><a href="pegawai.php" class="active">Data Pegawai</a></li>';
+									}
+									else {
+										echo '<li><a href="pegawai.php">Data Pegawai</a></li>';
+									}
+									if($pagedesc == "Slip Gaji") {
+										echo '<li><a href="slip_gaji.php" class="active">Slip Gaji</a></li>';
+									}
+									else {
+										echo '<li><a href="slip_gaji.php">Slip Gaji</a></li>';
+									}
+								?>
+							</ul><!-- /.nav-second-level -->
+						</li>
 						<?php
 							if(isset($menuparent) && $menuparent == "laporan") {
 								echo '<li class="active">';
@@ -161,7 +255,7 @@
 								echo '<li>';
 							}
 						?>
-                        <!-- open <li> tag generated with php, see line 155-160 -->
+                        <!-- Laporan -->
 							<a href="#"><i class="fa fa-folder fa-fw"></i>&nbsp;Laporan<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<?php
@@ -174,9 +268,9 @@
 								?>
 							</ul><!-- /.nav-second-level -->
 						</li>
-	                </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+		                </ul>
+                 </div>
+                 <!-- /.sidebar-collapse -->
+             </div>
+             <!-- /.navbar-static-side -->
+         </nav>

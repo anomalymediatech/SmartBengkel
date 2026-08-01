@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `trx_detail` (
   `nama_snap`   VARCHAR(100) NOT NULL,   -- snapshot nama barang/jasa
   `jenis_snap`  VARCHAR(20)  NOT NULL,   -- 'barang' / 'jasa'
   `harga_snap`  BIGINT       NOT NULL,   -- snapshot harga satuan saat jual
+  `harga_modal_snap` BIGINT  NOT NULL DEFAULT 0,  -- snapshot harga modal (utk laba)
   `diskon`      BIGINT       NOT NULL DEFAULT 0,  -- diskon per unit
   `jml`         INT(11)      NOT NULL,
   `subtotal`    BIGINT       NOT NULL,   -- (harga_snap - diskon) * jml
@@ -55,6 +56,10 @@ CREATE TABLE IF NOT EXISTS `trx_detail` (
   KEY `idx_id_trx` (`id_trx`),
   KEY `idx_id_brg` (`id_brg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Jaga jika tabel sudah terlanjur dibuat tanpa kolom harga_modal_snap
+ALTER TABLE `trx_detail`
+  ADD COLUMN IF NOT EXISTS `harga_modal_snap` BIGINT NOT NULL DEFAULT 0;
 
 -- ---------------------------------------------------------------------
 -- MODUL 3 — DATA MASTER

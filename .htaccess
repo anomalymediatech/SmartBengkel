@@ -1,0 +1,13 @@
+# SmartBengkel - Keamanan dasar untuk shared hosting
+Options -Indexes
+ServerSignature Off
+
+# Blokir akses langsung ke file sensitif
+<FilesMatch "\.(sql|md|ini|log|lock|json|yml|yaml)$">
+  Require all denied
+</FilesMatch>
+
+# Blokir akses ke .env dan file tersembunyi
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

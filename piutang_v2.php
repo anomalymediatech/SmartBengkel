@@ -58,7 +58,7 @@
 	// =================================================================
 	// QUERY: DAFTAR PIUTANG (transaksi Hutang yang Belum Lunas)
 	// =================================================================
-	$sql = "SELECT trx.*, konsumen.nama_kon, konsumen.telp, konsumen.wa_kon,
+	$sql = "SELECT trx.*, konsumen.nama_kon, konsumen.telp_kon, konsumen.wa_kon,
 		(SELECT COALESCE(SUM(jumlah),0) FROM bayar_piutang WHERE id_trx=trx.id_trx) as cicilan
 		FROM trx
 		LEFT JOIN konsumen ON trx.id_kon=konsumen.id_kon

@@ -14,6 +14,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Koneksi database
+include("dist/config/koneksi.php");
+
 // Paksa HTTPS di production
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'on') {
     // Uncomment baris ini di production:
@@ -112,7 +115,7 @@ if (isset($_POST['login'])) {
 
     } elseif ($akses == "Kasir") {
         // Login sebagai Kasir
-        $stmt = $conn->prepare("SELECT id_kasir, user_kasir, pass_kasir, nama_kasir, foto FROM kasir WHERE user_kasir = ? LIMIT 1");
+        $stmt = $conn->prepare("SELECT id_kasir, user_kasir, pass_kasir, nama_kasir, foto_kasir FROM kasir WHERE user_kasir = ? LIMIT 1");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -134,7 +137,7 @@ if (isset($_POST['login'])) {
 
                 $_SESSION['kasir'] = strtolower($row['id_kasir']);
                 $_SESSION['kasirname'] = $row['nama_kasir'];
-                $_SESSION['kasirfoto'] = $row['foto'];
+                $_SESSION['kasirfoto'] = $row['foto_kasir'];
                 $_SESSION['login_time'] = time();
                 $_SESSION['ip_address'] = $_SERVER['REMOTE_ADDR'] ?? '';
 

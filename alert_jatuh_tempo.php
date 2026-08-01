@@ -27,10 +27,10 @@
 	if($piutang_count > 0 || $hutang_count > 0) {
 		echo '<div class="alert alert-blink alert-danger">';
 		if($piutang_count > 0) {
-			echo '⚠️ Ada <strong>'.$piutang_count.'</strong> piutang pelanggan mendekati/lewat jatuh tempo! <a href="piutang_v2.php" class="alert-link">Lihat Detail</a><br>';
+			echo '⚠️ Ada <strong>'.$piutang_count.'</strong> piutang pelanggan mendekati/lewat jatuh tempo! <a href="/piutang_v2.php" class="alert-link">Lihat Detail</a><br>';
 		}
 		if($hutang_count > 0) {
-			echo '⚠️ Ada <strong>'.$hutang_count.'</strong> hutang supplier mendekati/lewat jatuh tempo! <a href="hutang_supplier_v2.php" class="alert-link">Lihat Detail</a>';
+			echo '⚠️ Ada <strong>'.$hutang_count.'</strong> hutang supplier mendekati/lewat jatuh tempo! <a href="/hutang_supplier_v2.php" class="alert-link">Lihat Detail</a>';
 		}
 		echo '</div>';
 	}

@@ -3,15 +3,19 @@
 	
 	// query database memperbarui data pada database
 	if(isset($_POST['perbarui'])) {
-		$id=$_POST['kon'];
-		$nama=$_POST['nama'];
-		$telp=$_POST['telp'];
-		$alamat=$_POST['alamat'];
+		$id     = (int)$_POST['kon'];
+		$nama   = mysqli_real_escape_string($conn, trim($_POST['nama']));
+		$telp   = mysqli_real_escape_string($conn, trim($_POST['telp']));
+		$wa     = mysqli_real_escape_string($conn, trim($_POST['wa']));
+		$alamat = mysqli_real_escape_string($conn, trim($_POST['alamat']));
+		$plat   = mysqli_real_escape_string($conn, trim($_POST['plat_nomor']));
 		$sql = "UPDATE konsumen SET
-				nama_kon='". $nama ."',
-				telp_kon='". $telp ."',
-				alamat_kon='". $alamat ."'
-				WHERE id_kon='". $id ."'";
+				nama_kon='$nama',
+				telp_kon='$telp',
+				wa_kon='$wa',
+				alamat_kon='$alamat',
+				plat_nomor='$plat'
+				WHERE id_kon='$id'";
 		$ress = mysqli_query($conn, $sql);
 		header("location: konsumen.php?act=update&msg=success");
 	}

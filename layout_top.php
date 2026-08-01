@@ -81,7 +81,7 @@
             <ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown dropdown-right">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<img src="../foto/<?php echo $sess_kasirfoto;?>" width="20px" height="20px" padding="0px">&nbsp;&nbsp;<?php echo ucfirst($sess_kasirname); ?>&nbsp;<i class="fa fa-caret-down"></i>
+						<img src="../foto/<?php echo $sess_admfoto;?>" width="20px" height="20px" padding="0px">&nbsp;&nbsp;<?php echo ucfirst($sess_admname); ?>&nbsp;<i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="pengaturan.php"><i class="fa fa-gear fa-fw"></i>&nbsp;Pengaturan Akun</a></li>

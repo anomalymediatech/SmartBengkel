@@ -1,0 +1,13 @@
+.git
+.claude
+.kiro
+.env
+.env.example
+node_modules
+tests
+temp_repo
+setup.ps1
+setup_sample_data.php
+*.log
+Thumbs.db
+.DS_Store

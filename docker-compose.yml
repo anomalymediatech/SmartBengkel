@@ -1,0 +1,30 @@
+# SmartBengkel - docker-compose untuk deploy ke Railway / local test
+# Railway: buat project baru lalu "Deploy from Dockerfile" (atau gunakan Railway CLI:
+#   railway up / railway deploy)
+#
+# Di Railway, service database dibuat terpisah, atau pakai var env DB_HOST/DB_PORT.
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-}
+      DB_NAME: ${DB_NAME:-db_bengkel}
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASS:-root}
+      MARIADB_DATABASE: ${DB_NAME:-db_bengkel}
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:

@@ -35,7 +35,21 @@
 									<div class="form-group">
 										<label class="control-label col-sm-3">Telepon</label>
 										<div class="col-sm-4">
-											<input type="number" name="telp" min="0" class="form-control" placeholder="Telepon" required>
+											<input type="text" name="telp" class="form-control" placeholder="Telepon" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-3">WhatsApp</label>
+										<div class="col-sm-4">
+											<input type="text" name="wa" class="form-control" placeholder="Nomor WhatsApp (contoh: 08123456789)">
+											<small class="text-muted">Gunakan format internasional (mulai 62)</small>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-3">Plat Nomor Default</label>
+										<div class="col-sm-4">
+											<input type="text" name="plat_nomor" class="form-control" placeholder="Contoh: B 1234 ABC">
+											<small class="text-muted">Plat nomor kendaraan utama pelanggan ini</small>
 										</div>
 									</div>
 									<div class="form-group">

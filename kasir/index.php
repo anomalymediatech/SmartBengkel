@@ -29,8 +29,8 @@
         $item_terjual = (int)$row_items['item_terjual'];
     }
 
-    $pagedesc = "Beranda";
-    include("layout_top.php");
+$pagedesc = "Beranda";
+include("layout_top.php");
 ?>
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -39,6 +39,9 @@
                 <h1 class="page-header">Beranda Kasir</h1>
             </div>
         </div>
+
+        <!-- Alert Jatuh Tempo -->
+        <?php include("alert_jatuh_tempo.php"); ?>
 
         <!-- 3 Widget Statistik (col-lg-4 col-md-6) -->
         <div class="row">

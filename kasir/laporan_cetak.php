@@ -3,6 +3,10 @@
 
 	include("dist/function/format_tanggal.php");
 	include("dist/function/format_rupiah.php");
+	$stmt_toko = $conn->prepare("SELECT nama_toko, alamat, telp FROM toko WHERE id_toko=1");
+	$stmt_toko->execute();
+	$res_toko = $stmt_toko->get_result();
+	$toko = $res_toko->fetch_assoc();
 	$mulai 	 = $_GET['awal'];
 	$selesai = $_GET['akhir'];
 	$sql = "SELECT trx.*, konsumen.*, kasir.* FROM trx, konsumen, kasir WHERE
@@ -11,7 +15,7 @@
 	$ress = mysqli_query($conn, $sql);
 	// deskripsi halaman
 	$pagedesc = "Laporan Data Transaksi - Periode " . IndonesiaTgl($mulai) ." - ". IndonesiaTgl($selesai);
-	$pagetitle = str_replace(" ", "_", $pagedesc)
+	$pagetitle = str_replace(" ", "_", $pagedesc);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,9 +61,9 @@
 							<img src="foto/logo.png" alt="logo-dkm" width="70" />
 						</td>
 						<td class="text-center" width="60%">
-						<b>Bengkel Mantap Jiwa</b> <br>
-						Bekasi<br>
-						Telp: (021) 192819189<br>
+						<b><?php echo htmlspecialchars($toko['nama_toko'] ?? 'Bengkel Mantap Jiwa'); ?></b> <br>
+						<?php echo htmlspecialchars($toko['alamat'] ?? ''); ?><br>
+						<?php if(!empty($toko['telp'])): ?>Telp: <?php echo htmlspecialchars($toko['telp']); ?><br><?php endif; ?>
 						<td class="text-right" width="20%">
 						</td>
 					</tr>

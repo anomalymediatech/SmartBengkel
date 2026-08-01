@@ -1,5 +1,11 @@
 <?php
-	include("sess_check.php");
+	include("dist/config/koneksi.php");
+	session_start();
+	// Boleh diakses Admin (root) maupun Kasir (kasir/): cek salah satu session
+	if(!isset($_SESSION['admin']) && !isset($_SESSION['kasir'])){
+		header("location: login.php?login=false");
+		exit;
+	}
 	include("dist/function/format_tanggal.php");
 	include("dist/function/format_rupiah.php");
 

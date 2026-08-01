@@ -52,8 +52,8 @@ if(isset($_POST['simpan'])){
         $item_diskon = isset($res['diskon']) ? (int)$res['diskon'] : 0;
 
         // Insert into trx_detail table (snapshot)
-        $sql_detail = "INSERT INTO trx_detail (id_trx, id_brg, nama_snap, jenis_snap, harga_snap, diskon, jml, subtotal)
-                       VALUES ('$no', '$br', '{$res['nama']}', '$jns', '{$res['harga']}', '$item_diskon', '$jml', '" . ($ttl - $item_diskon * $jml) . "')";
+        $sql_detail = "INSERT INTO trx_detail (id_trx, id_brg, nama_snap, jenis_snap, harga_snap, harga_modal_snap, diskon, jml, subtotal)
+                       VALUES ('$no', '$br', '{$res['nama']}', '$jns', '{$res['harga']}', '{$res['harga_modal']}', '$item_diskon', '$jml', '" . ($ttl - $item_diskon * $jml) . "')";
         mysqli_query($conn, $sql_detail);
 
         $grand += ($ttl - $item_diskon * $jml);
@@ -69,14 +69,20 @@ if(isset($_POST['simpan'])){
                VALUES ('$no', '$kon', '$tg', '$grand', '$kasir', '$metode_bayar', '$diskon_nota', '$status_bayar', " . ($jatuh_tempo ? "'$jatuh_tempo'" : "NULL") . ", " . ($plat_nomor ? "'$plat_nomor'" : "NULL") . ", " . ($catatan ? "'$catatan'" : "NULL") . ")";
     mysqli_query($conn, $sqltrx);
 
-    // Handle Hutang/Bon payments
-    if($metode_bayar == 'Hutang' && $grand > 0){
-        // Insert into hutang_supplier or bayar_piutang as needed
-        // For customer hutang (piutang):
+    // Handle Hutang/Bon: catat DP bila ada uang muka diterima saat transaksi.
+    // Piutang sisa = total - bayar - SUM(bayar_piutang). Tanpa pembayaran,
+    // jangan insert ke bayar_piutang agar sisa piutang = total.
+    $dibayar = 0;
+    if($metode_bayar == 'Hutang' && isset($_POST['dibayar']) && (int)$_POST['dibayar'] > 0){
+        $dibayar = (int)$_POST['dibayar'];
+        if($dibayar > $grand) $dibayar = $grand;
         $sql_piutang = "INSERT INTO bayar_piutang (id_trx, tgl, jumlah, id_kasir)
-                        VALUES ('$no', '$tg', '$grand', '$kasir')";
+                        VALUES ('$no', '$tg', '$dibayar', '$kasir')";
         mysqli_query($conn, $sql_piutang);
+        $status_bayar = ($dibayar >= $grand) ? 'Lunas' : 'Belum Lunas';
     }
+    $sql_upd_bayar = "UPDATE trx SET bayar='$dibayar', status_bayar='$status_bayar' WHERE id_trx='$no'";
+    mysqli_query($conn, $sql_upd_bayar);
 
     if(mysqli_affected_rows($conn) > 0){
         echo "<script type='text/javascript'> document.location = 'trx.php'; </script>";

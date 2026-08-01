@@ -39,16 +39,16 @@
 													<?php
 													$mySql = "SELECT * FROM barangjasa WHERE jenis='barang' ORDER BY nama ASC";
 													$myQry = mysqli_query($conn, $mySql);
-													$dataBrg = $result['id_brg'];
+													$dataBrg = $data['id_brg'];
 													while ($Brg = mysqli_fetch_array($myQry)) {
 														if ($Brg['id_brg']== $dataBrg) {
 														$cek = " selected";
 														} else { $cek=""; }
-														echo "<option value='$Brg[id_brg]' $cek>".$Brg[nama]."</option>";
+														echo "<option value='$Brg[id_brg]' $cek>".$Brg['nama']."</option>";
 													}
 													?>
 											</select>
-											<input type="hidden" name="id" class="form-control" placeholder="Nama" value="<?php echo $data['id_trx'] ?>" required>
+											<input type="hidden" name="id" class="form-control" placeholder="Nama" value="<?php echo htmlspecialchars($data['id_trxbrg']) ?>" required>
 											<input type="hidden" name="brgold" class="form-control" placeholder="Nama" value="<?php echo $data['id_brg'] ?>" required>
 										</div>
 									</div>
@@ -59,17 +59,15 @@
 													<?php
 													$mySpl = "SELECT * FROM supplier ORDER BY nama_spl ASC";
 													$myQrys = mysqli_query($conn, $mySpl);
-													$dataSpl = $res['id_spl'];
+													$dataSpl = $data['id_spl'];
 													while ($Spl = mysqli_fetch_array($myQrys)) {
 														if ($Spl['id_spl']== $dataSpl) {
 														$cek = " selected";
 														} else { $cek=""; }
-														echo "<option value='$Spl[id_spl]' $cek>".$Spl[nama_spl]."</option>";
+														echo "<option value='$Spl[id_spl]' $cek>".$Spl['nama_spl']."</option>";
 													}
 													?>
 											</select>
-											<input type="hidden" name="id" class="form-control" placeholder="Nama" value="<?php echo $data['id_trx'] ?>" required>
-											<input type="hidden" name="brgold" class="form-control" placeholder="Nama" value="<?php echo $data['id_brg'] ?>" required>
 										</div>
 									</div>
 									<div class="form-group">

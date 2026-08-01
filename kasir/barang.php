@@ -26,6 +26,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<a href="barang_tambah.php" class="btn btn-success">Tambah</a>
+								<a href="barang_import.php" class="btn btn-info" style="margin-left:5px">Import CSV</a>
 							</div>
 							<div class="panel-body">
 								<table class="table table-striped table-bordered table-hover" id="tabel-data">

@@ -1,0 +1,28 @@
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+error_log
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# Nested dev repo
+temp_repo/
+
+# Vendor (if using Composer later)
+vendor/

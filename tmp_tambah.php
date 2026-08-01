@@ -19,7 +19,7 @@ $stok = $res['stok'];
 		echo "<script>alert('Stok kurang dari jumlah yang diinginkan!');</script>";	
 		echo "<script type='text/javascript'> document.location = 'tmp_tambah.php'; </script>";
 	}else{
-		$sqli="INSERT INTO tmp_trx(id_trx,id_brg,jml,id_adm,status)VALUES('$null','$brg','$jumlah','$id','$stt')";
+		$sqli="INSERT INTO tmp_trx(id_trx,id_brg,jml,id_kasir,status)VALUES('$null','$brg','$jumlah','$id','$stt')";
 		$ressi = mysqli_query($conn, $sqli);
 		echo "<script type='text/javascript'> document.location = 'trx_baru.php'; </script>";
 	}

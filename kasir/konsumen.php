@@ -51,7 +51,7 @@
 												echo '<td>' . htmlspecialchars($data['alamat_kon']) .'</td>';
 												echo '<td class="text-center">
 													  <a href="konsumen_edit.php?kon=' . htmlspecialchars($data['id_kon']) .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="konsumen_hapus.php?kon=<?php echo $data['id_kon'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo ' . htmlspecialchars($data['nama_kon']) . ';?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
+													  <a href="konsumen_hapus.php?kon=<?php echo $data['id_kon'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo htmlspecialchars($data['nama_kon']);?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
 												<?php
 													  echo '</td>';
 												echo '</tr>';												

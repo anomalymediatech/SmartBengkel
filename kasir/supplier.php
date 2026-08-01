@@ -1,6 +1,6 @@
 <?php
 	include("sess_check.php");
-	
+
 	// deskripsi halaman
 	$pagedesc = "Data Supplier";
 	include("layout_top.php");
@@ -16,11 +16,11 @@
                         <h1 class="page-header">Data Supplier</h1>
                     </div><!-- /.col-lg-12 -->
                 </div><!-- /.row -->
-				
+
 				<div class="row">
 					<div class="col-lg-12"><?php include("layout_alert.php"); ?></div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
@@ -50,11 +50,10 @@
 												echo '<td>' . htmlspecialchars($data['telp_spl']) .'</td>';
 												echo '<td>' . htmlspecialchars($data['alamat_spl']) .'</td>';
 												echo '<td class="text-center">
-													  <a href="supplier_edit.php?spl=' . htmlspecialchars($data['id_spl']) .'" class="btn btn-warning btn-xs">Edit</a>';?>
-													  <a href="supplier_hapus.php?spl=<?php echo $data['id_spl'];?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo ' . htmlspecialchars($data['nama_spl']) . ';?>?');" class="btn btn-danger btn-xs">Hapus</a></td>
-												<?php
-													  echo '</td>';
-												echo '</tr>';												
+													  <a href="supplier_edit.php?spl='.htmlspecialchars($data['id_spl']).'" class="btn btn-warning btn-xs">Edit</a>
+													  <a href="supplier_hapus.php?spl='.htmlspecialchars($data['id_spl']).'" onclick="return confirm(\'Apakah anda yakin akan menghapus '.htmlspecialchars($data['nama_spl']).' ?\');" class="btn btn-danger btn-xs">Hapus</a>
+													  </td>';
+												echo '</tr>';
 												$i++;
 											}
 										?>
@@ -70,7 +69,7 @@
 						</div>
 					</div>
 				</div>
-			</div>    
+			</div>
 						</div><!-- /.panel -->
 					</div><!-- /.col-lg-12 -->
 				</div><!-- /.row -->
@@ -86,7 +85,7 @@
 				{ "orderable": false, "targets": [4] }
 			]
 		});
-		
+
 		$('#tabel-data').parent().addClass("table-responsive");
 	});
 </script>
@@ -94,7 +93,7 @@
 		var app = {
 			code: '0'
 		};
-		
+
 		$('[data-load-code]').on('click',function(e) {
 					e.preventDefault();
 					var $this = $(this);
@@ -102,9 +101,9 @@
 					if(code) {
 						$($this.data('remote-target')).load('karyawan_detail.php?code='+code);
 						app.code = code;
-						
+
 					}
-		});		
+		});
     </script>
 <?php
 	include("layout_bottom.php");
