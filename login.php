@@ -53,7 +53,7 @@
 						<div class="col-lg-12">
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<form action="login_auth_v2.php" method="post">
+									<form class="login-form" action="login_auth_v2.php" method="post">
 										<?php if (empty(session_id())) { session_start(); } if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); } ?>
 										<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 										<div class="form-group">

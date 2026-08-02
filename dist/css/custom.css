@@ -67,6 +67,23 @@ h1.page-header {
     border-radius: 0 0 3px 3px;
 }
 
+.login-form .form-control {
+    color: #212529;
+    background-color: #ffffff;
+    border-color: #ced4da;
+}
+
+.login-form .form-control::placeholder {
+    color: #495057;
+    opacity: 1;
+}
+
+.login-form .form-control:focus {
+    color: #212529;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, .6);
+}
+
 .sidebar ul li a.active {
     color: #ffffff;
 	background-color: #337ab7;
