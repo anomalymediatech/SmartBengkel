@@ -153,8 +153,35 @@
 									}
 								?>
 							</ul><!-- /.nav-second-level -->
+					</li>
+					<?php
+						if(isset($menuparent) && $menuparent == "master") {
+							echo '<li class="active">';
+						}
+						else {
+							echo '<li>';
+						}
+					?>
+					<a href="#"><i class="fa fa-database fa-fw"></i>&nbsp;Master Data<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
 						<?php
-							if(isset($menuparent) && $menuparent == "laporan") {
+							if($pagedesc == "Data Barang") {
+								echo '<li><a href="barang.php" class="active">Data Barang</a></li>';
+							}
+							else {
+								echo '<li><a href="barang.php">Data Barang</a></li>';
+							}
+							if($pagedesc == "Import Barang") {
+								echo '<li><a href="import_barang.php" class="active">Import Barang</a></li>';
+							}
+							else {
+								echo '<li><a href="import_barang.php">Import Barang</a></li>';
+							}
+						?>
+					</ul><!-- /.nav-second-level -->
+					</li>
+					<?php
+						if(isset($menuparent) && $menuparent == "laporan") {
 								echo '<li class="active">';
 							}
 							else {

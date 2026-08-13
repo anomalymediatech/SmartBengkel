@@ -2,7 +2,7 @@
 	include("sess_check.php");
 
 	$pagedesc = "Import Barang";
-	$menuparent = "import";
+	$menuparent = "master";
 	include("layout_top.php");
 
 	// ---- helper ----
